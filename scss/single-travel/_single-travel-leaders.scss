@@ -1,0 +1,24 @@
+#tour-leaders
+    {
+    background: $accent-color ;
+    
+    .container
+        {
+        @include section-padding($top-padding, $bottom-padding) ;
+
+        .title
+            {
+            @include title-tipography($primary-color) ;
+            text-align: center ;
+            line-height: 3.2rem ;
+           
+            .accent 
+                {
+                font-style: italic ;
+                font-weight: 200 ;
+                color: $secondary-color ;
+                }
+            }
+
+        }
+    }

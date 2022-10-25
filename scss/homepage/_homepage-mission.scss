@@ -1,0 +1,71 @@
+/* MISSION */
+#mission 
+    {
+    background-color: $accent-color ;
+
+    .container 
+        {
+        @include section-padding($full-top-padding, $full-bottom-padding) ;
+
+        .img-wrapper 
+            {
+            img:nth-child(1) 
+                {
+                max-width: 30% ;
+                z-index: 1 ;
+                transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6) ;
+                -webkit-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6) ;
+                -moz-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6) ;
+                -ms-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6) ;
+                -o-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6) ;
+                }
+
+            img:nth-child(2) 
+                {
+                max-width: 70% ;
+                z-index: 0 ;
+                }
+            }
+        }
+
+    .title 
+        {
+        @include payoff-tipography($secondary-color) ;
+        text-align: center ;
+        }
+
+    .content p
+        {
+        @include paragraph-tipography($primary-color) ;
+
+        &::first-letter
+            {
+            text-transform: capitalize ;
+            }
+        }
+
+    h2 .accent
+        {
+        @include accent-tipography($secondary-color) ;
+        }
+
+    .motto
+        {
+        @include accent-tipography($secondary-color) ;
+        text-align: center ;
+        }
+    }
+
+
+/* MEDIA QUERY*/    
+@media screen and (max-width: 991px) 
+    {
+    #mission .container .img-wrapper img:nth-child(1) 
+        {
+        transform: rotateZ(1deg) translate(28%, 4rem) scale(1.6);
+        -webkit-transform: rotateZ(1deg) translate(28%, 4rem) scale(1.6);
+        -moz-transform: rotateZ(1deg) translate(28%, 4rem) scale(1.6);
+        -ms-transform: rotateZ(1deg) translate(28%, 4rem) scale(1.6);
+        -o-transform: rotateZ(1deg) translate(28%, 4rem) scale(1.6);
+        }
+    }

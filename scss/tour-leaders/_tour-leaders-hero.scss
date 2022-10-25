@@ -1,0 +1,66 @@
+#tour-leaders-hero
+    {
+    height: 450px ;
+
+    .container-fluid
+        {
+        #hero-img
+            {
+            height: 620px ;
+            display: block ;
+            position: absolute ;
+            top: 0 ;
+            left: 0 ;
+            right: 0 ;
+            bottom: 0 ;
+            background-position: center ;
+            background-repeat: no-repeat ;
+            -webkit-background-size: cover ;
+            -moz-background-size: cover ;
+            background-size: cover ;
+            -o-background-size: cover ;
+        
+            &:before 
+                {
+                content: '' ;
+                position: absolute ;
+                height: 100% ;
+                width: 100% ;
+                background: rgba(0,0,0,0.6) ;
+                }
+
+            .text-box 
+                {
+                color: $white-color ;
+                top: 50% ;
+                left: 0 ;
+                width: 100% ;
+                text-align: center ;
+                position: absolute ;
+
+                    .payoff 
+                        {
+                        @include payoff-tipography($white-color) ;
+                        }
+
+                    .title 
+                        {
+                        text-align: center ;
+                        @include title-tipography($white-color) ;
+                        }
+
+                    .accent
+                        {
+                        @include accent-tipography($white-color) ;
+                        }
+
+                    .image-description
+                        {
+                        text-align: left ;
+                        margin-left: 40px;
+                        transform: translateY(180px);
+                        }
+                }
+            }
+        }
+    }

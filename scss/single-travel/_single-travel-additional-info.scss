@@ -1,0 +1,108 @@
+#choosing-us {
+    background-color: #F0E9D5;
+    height: 550px;
+}
+
+#choosing-us .title {
+    font-family: "Wulkan Display", serif;
+    font-size: calc(1.7rem + 0.3vw);
+    color: #a06b1b;
+    font-weight: 500;
+}
+
+#choosing-us ul,
+#choosing-us li {
+    font-size: 14px;
+    line-height: 2;
+    margin: 0;
+    padding: 0;
+}
+
+#choosing-us .wrap-component-1,
+#choosing-us .wrap-component-2 {
+    margin-top: 70px;
+}
+
+#choosing-us .owl-nav {
+    display: none;
+}
+
+#choosing-us .card {
+    padding: 20px;
+    width: 240px;
+    height: 330px;
+    border-radius: none;
+    color: #fff;
+    border: none;
+    font-size: 14px;
+
+}
+
+#choosing-us p.text-uppercase {
+    color: #FFF;
+    line-height: 0.6;
+}
+
+#choosing-us h6 {
+    line-height: 0.6;
+}
+
+#choosing-us .fa-brands {
+    padding: 4px;
+    margin: 5px;
+    text-align: center;
+    width: 28px;
+    height: 28px;
+    font-size: 17px;
+    color: #FFF;
+    border-radius: 25%;
+    border-style: solid;
+    border-width: 1.7px;
+    --fa-border-color: #FFF;
+
+}
+
+
+
+#choosing-us .card1 {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('../img/Maurizio_Levi.jpg');
+}
+
+/* #choosing-us .card1:hover {
+    background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)), url('../img/Maurizio_Levi.jpg');
+} */
+
+#choosing-us .owl-carousel,
+#choosing-us .owl-theme {
+    right: 0 !important;
+}
+
+@media only screen and (max-width: 768px) {
+    #choosing-us {
+        height: 800px;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    #choosing-us.row {
+        position: relative;
+    }
+
+    #choosing-us .wrap-component-1 {
+        position: absolute;
+        right: 25%;
+        text-align: justify;
+        margin: 0;
+        padding: 0;
+        margin-top: 70px;
+        padding-right: 25%;
+    }
+
+    #choosing-us .wrap-component-2 {
+        position: absolute;
+        right: 0;
+        margin: 0;
+        padding: 0;
+        margin-top: 70px;
+    }
+}

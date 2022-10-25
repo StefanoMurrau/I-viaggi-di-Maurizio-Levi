@@ -1,0 +1,147 @@
+/* ADDITIONAL-INFO */
+#additional-info
+    {
+    background: $white-color ;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #f8f3eb), color-stop(50%, $white-color));
+    background: linear-gradient(180deg, #f8f3eb 50%, $white-color 50%);
+
+    .container
+        {
+        @include section-padding($top-padding, 0) ;
+
+        .payoff 
+            {
+            @include payoff-tipography($secondary-color) ;
+            margin-bottom: 0 ;
+            }
+
+        .title 
+            {
+            @include title-tipography($primary-color) ;
+            text-align: center ;
+            line-height: 3.2rem ;
+            }
+
+        .content 
+            {
+            font-size: calc(1.2rem + 0.2vw) ;
+            }
+
+        h2 .accent 
+            {
+            font-style: italic ;
+            font-weight: 200 ;
+            color: $secondary-color ;
+            }
+
+        #points-of-strength
+            {
+            .title 
+                {
+                text-align: center ;
+                @include payoff-tipography($secondary-color) 
+                }
+
+            ul 
+                {
+                list-style: none ;
+                margin: 0 ;
+                padding: 0 ;
+                }
+
+            .diamond 
+                {
+                height: 30px ;
+                width: 30px ;
+                background-color: $secondary-color ;
+                border: 1px solid $secondary-color ;
+                transform: rotateZ(45deg) ;
+                -webkit-transform: rotateZ(45deg) ;
+                -moz-transform: rotateZ(45deg) ;
+                -ms-transform: rotateZ(45deg) ;
+                -o-transform: rotateZ(45deg) ;
+                }
+
+            }
+
+        .img-wrapper img:nth-child(1) 
+            {
+            max-width: 70% ;
+            transform: rotateZ(3deg) ;
+            -webkit-transform: rotateZ(3deg) ;
+            -moz-transform: rotateZ(3deg) ;
+            -ms-transform: rotateZ(3deg) ;
+            -o-transform: rotateZ(3deg) ;
+            }
+
+        .img-wrapper img:nth-child(2) {
+            max-width: 30%;
+            transform: translate(-10%, 30%) scale(1.4) ;
+            -webkit-transform: translate(-10%, 30%) scale(1.4) ;
+            -moz-transform: translate(-10%, 30%) scale(1.4) ;
+            -ms-transform: translate(-10%, 30%) scale(1.4) ;
+            -o-transform: translate(-10%, 30%) scale(1.4) ;
+            }
+
+        #testament
+            {
+            .content
+                {
+                @include paragraph-tipography($primary-color) 
+                }
+
+            .signature 
+                {
+                font-weight: bold ;
+                font-style: italic ;
+                font-size: 90% ;
+                }
+            }
+        }
+    }
+
+
+/* MEDIA QUERY*/ 
+@media screen and (min-width: 992px) 
+    {
+    #additional-info
+        {
+        #points-of-strength ul li:nth-child(2) 
+            {
+            transform: translate(30%, 5rem) ;
+            -webkit-transform: translate(30%, 5rem) ;
+            -moz-transform: translate(30%, 5rem) ;
+            -ms-transform: translate(30%, 5rem) ;
+            -o-transform: translate(30%, 5rem) ;
+            }
+
+        #points-of-strength ul li:nth-child(3) 
+            {
+            transform: translate(100%) ;
+            -webkit-transform: translate(100%) ;
+            -moz-transform: translate(100%) ;
+            -ms-transform: translate(100%) ;
+            -o-transform: translate(100%) ;
+            }
+
+        .img-wrapper img:nth-child(1) 
+            {
+            max-width: 70% ;
+            transform: translateX(30%) rotateZ(3deg) ;
+            -webkit-transform: translateX(30%) rotateZ(3deg) ;
+            -moz-transform: translateX(30%) rotateZ(3deg) ;
+            -ms-transform: translateX(30%) rotateZ(3deg) ;
+            -o-transform: translateX(30%) rotateZ(3deg) ;
+            }
+
+        .img-wrapper img:nth-child(2) 
+            {
+            max-width: 30% ;
+            transform: translate(-10%, 90%) scale(1.6) ;
+            -webkit-transform: translate(-10%, 90%) scale(1.6) ;
+            -moz-transform: translate(-10%, 90%) scale(1.6) ;
+            -ms-transform: translate(-10%, 90%) scale(1.6) ;
+            -o-transform: translate(-10%, 90%) scale(1.6) ;
+            }
+        }
+    }

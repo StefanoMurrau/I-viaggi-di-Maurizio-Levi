@@ -1,0 +1,68 @@
+/* SUBFOOTER*/
+#subfooter
+    {
+    background-color: $primary-color ;
+    color: $white-color ;
+
+    hr
+        {
+        width: 20px ;
+        text-align: center ;
+        margin: auto ;
+        display: none ;
+        }
+
+    ul
+        {
+        display: flex ;
+        flex-direction: row ;
+        flex-wrap: wrap ;
+        list-style: none ;
+        height: 100% ;
+        padding-top: 1rem ;
+        padding-bottom: 1rem ;
+        padding-left: 0 ;
+        padding-right: 0 ;
+
+        li
+            {
+            text-align: center ;
+            width: 20% ;
+          
+            a
+                {
+                text-decoration: none ;
+                color: $white-color ;
+   
+                &:hover
+                    {
+                    color: $accent-color ;
+                    }
+                }
+            }
+        }
+    }
+
+
+/* MEDIA QUERY*/
+@media screen and (max-width: 768px) 
+    {
+    #subfooter 
+        {
+        hr
+            {
+            display: block ;
+            }
+
+        ul 
+            {
+            flex-direction: column ;
+            
+            li
+                {
+                padding-top: 0.2rem ;
+                padding-bottom: 0.2rem ;
+                }
+            }
+        }
+    }

@@ -1,0 +1,55 @@
+/* info nazioni */
+#info-nazioni {
+    background-color: $accent-color;
+    color: $primary-color;
+    
+    .container 
+        {
+        padding-top: 3em;
+        padding-bottom: 3em;
+        
+
+        .payoff {
+            @include payoff-tipography($secondary-color);
+            font-weight: normal;
+            text-transform: uppercase;
+            margin-bottom: 0px;
+        }
+
+        .title {
+            @include title-tipography($primary-color);
+            // font-weight: bold;
+            text-transform: capitalize;
+        }
+
+        .excerpt {
+            text-align: justify;
+            padding: 1px 1px;
+        }
+
+        .content {
+            text-align: justify;
+            padding: 1px 1px;
+        }
+
+        .img-wrapper img:nth-child(1) {
+            max-width: 70%;
+        }
+
+        .img-wrapper img:nth-child(2) {
+            max-width: 30%;
+            transform: rotateZ(-4deg) translate(-5rem, 50%) scale(1.6);
+            -webkit-transform: rotateZ(-4deg) translate(-5rem, 50%) scale(1.6);
+            -moz-transform: rotateZ(-4deg) translate(-5rem, 50%) scale(1.6);
+            -ms-transform: rotateZ(-4deg) translate(-5rem, 50%) scale(1.6);
+            -o-transform: rotateZ(-4deg) translate(-5rem, 50%) scale(1.6);
+        }
+
+        table thead {
+            border-top: 1px solid #3a2f26 !important;
+            border-bottom: 1px solid #3a2f26 !important;
+            text-transform: uppercase;
+            color: #3a2f26
+        }
+    }
+}

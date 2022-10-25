@@ -1,0 +1,22 @@
+.cta
+    {
+    background-color: $primary-color ;
+
+    .container 
+        {
+        @include section-padding(0, 0) ;
+
+        
+        .title
+            {
+            @include title-tipography($white-color) ;
+            font-size: calc(1.1rem + 0.3vw) ;
+            margin-top: 1rem ;
+            }
+
+        p
+            {
+            color: $white-color ;
+            }
+        }  
+    }

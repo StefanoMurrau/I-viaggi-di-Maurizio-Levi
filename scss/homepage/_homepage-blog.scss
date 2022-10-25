@@ -1,0 +1,107 @@
+/* BLOG */
+#blog
+    {
+    background: $white-color ;
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(50%, #f8f3eb), color-stop(50%, $white-color));
+    background: linear-gradient(180deg, #f8f3eb 50%, $white-color 50%);
+    
+    .container
+        {
+        @include section-padding($top-padding, $full-bottom-padding) ;
+
+        .payoff
+            {
+            @include payoff-tipography($secondary-color) ;
+            margin-bottom: 0 ;
+            }
+        
+        .title
+            {
+            @include title-tipography($primary-color) ;
+            text-align: center ;
+            line-height: 3.5rem ;
+            }
+
+        h2 .accent 
+            {
+            font-style: italic ;
+            font-weight: 200 ;
+            color: $secondary-color ;
+            }
+
+        .card
+            {
+            border: none ;
+            border-radius: 0 ;
+            transition: all 0.4s ease-in-out ;
+
+            img
+                {
+                height: 500px ;
+                background-position: center center ;
+                background-repeat: no-repeat ;
+                background-size: contain ;
+                }
+
+            .card-text
+                {
+                @include paragraph-tipography($primary-color) ;
+                text-align: center ;
+                }
+
+            .card-footer
+                {
+                background-color: #FFF ;
+                border-top: None ;
+                }
+            }
+
+        }
+    }
+
+
+/* MEDIA QUERY*/   
+@media screen and (min-width: 992px) 
+    {
+    #blog
+        {
+        .container
+            {
+            .col:nth-child(2) .card 
+                {
+                transform: translateY(8%) ;
+                -webkit-transform: translateY(8%) ;
+                -moz-transform: translateY(8%) ;
+                -ms-transform: translateY(8%) ;
+                -o-transform: translateY(8%) ;
+                }
+            }
+        }
+    }
+
+@media screen and (min-width: 768px) 
+    {
+    #blog
+        {
+        .container
+            {
+            .col:nth-child(2) .card:hover
+                {
+                transform: rotate(3deg) translateY(8%) ;
+                -webkit-transform: rotate(3deg) translateY(8%) ;
+                -moz-transform: rotate(3deg) translateY(8%) ;
+                -ms-transform: rotate(3deg) translateY(8%) ;
+                -o-transform: rotate(3deg) translateY(8%) ;
+                }
+
+            .card:hover
+                {
+                transform: rotate(3deg) ;
+                -webkit-transform: rotate(3deg) ;
+                -moz-transform: rotate(3deg) ;
+                -ms-transform: rotate(3deg) ;
+                -o-transform: rotate(3deg) ;
+                }
+            }
+        }
+    }

@@ -1,0 +1,49 @@
+#about-us-content
+    {
+    background: rgba(255, 255, 255, 1) ;
+    background-image: linear-gradient(rgb(224, 201, 170), 80%, #fff0) ;
+
+    .container
+        {
+        @include section-padding($full-top-padding, $full-bottom-padding) ;
+
+        .row
+            {
+            height: 1100px ;
+         
+            #about-us-img-2
+                {
+                transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -webkit-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -moz-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -ms-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -o-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                }
+
+            #about-us-img-4
+                {
+                transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -webkit-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -moz-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -ms-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                -o-transform: scale(0.6) translate(45%, -150%) rotate(10deg) ;
+                }
+
+            .title 
+                {
+                @include payoff-tipography($secondary-color) ;
+                text-align: center ;
+                }
+        
+            .content p
+                {
+                @include paragraph-tipography($primary-color) ;
+        
+                &::first-letter
+                    {
+                    text-transform: capitalize ;
+                    }
+                }
+            }
+        }
+    }

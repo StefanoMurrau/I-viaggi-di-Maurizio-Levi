@@ -1,0 +1,69 @@
+/* info continenti */
+#info-continenti 
+    {
+    background-color: $accent-color;
+    color: $primary-color;
+
+    @include section-padding($full-top-padding, $full-bottom-padding) ;
+
+    .payoff 
+        {
+        @include payoff-tipography($secondary-color);
+        font-weight: normal;
+        text-transform: uppercase;
+        }
+
+    .title 
+        {
+        font-family: "Playfair Display",serif;
+        font-size: calc(1.1rem + .3vw);
+        color: #a06b1b;
+        text-transform: uppercase;
+        font-weight: 300;
+        text-align: left;
+        }
+
+    .accent
+        {
+        font-style: italic;
+        }
+    
+    .excerpt 
+        {
+        padding: 1px 1px;
+        }
+    
+    .content 
+        {
+        padding: 1px 1px;
+        font-size: calc(1rem + .2vw);
+        color: #3a2f26;
+        }
+
+    .img-wrapper img:nth-child(1) 
+        {
+        max-width: 30%;
+        z-index: 1;
+        transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6);
+        -webkit-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6);
+        -moz-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6);
+        -ms-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6);
+        -o-transform: rotateZ(1deg) translate(5rem, 4rem) scale(1.6);
+        }
+        
+    .img-wrapper img:nth-child(2) 
+        {
+        max-width: 70%;
+        z-index: 0;
+        }
+
+    
+    @media screen and (max-width: 767px)  
+        {
+        .img-wrapper
+            {
+            padding-right: 40px;
+            }
+        }
+    
+    }

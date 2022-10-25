@@ -1,0 +1,63 @@
+@mixin paragraph-tipography($color) 
+    {
+    font-size: calc(1rem + 0.2vw) ;
+    color: $color ;
+    }
+
+@mixin payoff-tipography($color)
+    {
+    font-family: 'Playfair Display', serif;
+    font-size: calc(1.1rem + 0.3vw) ;
+    color: $color ;
+    text-transform: uppercase ;
+    font-weight: 300 ;
+    }
+
+@mixin title-tipography($color)
+    {
+    font-family: 'Playfair Display', serif;
+    font-size: calc(2.6rem + 1vw) ;
+    color: $color ;
+    font-weight: 500 ;
+    }
+
+@mixin accent-tipography($color)
+    {
+    font-style: italic ;
+    font-weight: 200 ;
+    color: $color ;
+    }
+
+@mixin section-padding($pad-top, $pad-bottom)
+    {
+    padding-top: $pad-top ;
+    padding-bottom: $pad-bottom ;
+    }
+
+@mixin button($color, $backgroud-color, $hover-color, $hover-backgroud-color)
+    {
+    background-color: $backgroud-color ;
+    border: 1.6px solid $color ;
+    color: $color ;
+    padding: 10px 30px 10px 30px ;
+    transition: 0.6s ;
+    line-height: 100% ;
+    display: inline-block;
+    font-weight: 400;
+    text-align: center;
+    text-decoration: none;
+    vertical-align: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    user-select: none;
+    font-size: 1rem;
+    border-radius: 20px ;
+  
+    &:hover 
+        {
+        background-color: $hover-backgroud-color ;
+        border-color: $hover-backgroud-color ;
+        color: $hover-color ;
+        cursor: pointer;
+        }
+    }

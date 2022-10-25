@@ -1,0 +1,62 @@
+@font-face 
+    {
+    font-family: 'Open Sans';
+    font-style: italic;
+    src: local('Open_Sans/OpenSans-Italic-VariableFont_wdth,wght.ttf') ;
+    font-weight: 1 999;
+    }
+
+@font-face 
+    {
+    font-family: 'Open Sans';
+    font-style: normal;
+    src: local('Open_Sans/OpenSans-VariableFont_wdth,wght.ttf') ;
+    font-weight: 1 999;
+    }
+
+@font-face 
+    {
+    font-family: 'Playfair Display';
+    font-style: italic;
+    src: local('Playfair_Display/PlayfairDisplay-Italic-VariableFont_wght.ttf') ;
+    font-weight: 1 999;
+    }
+
+@font-face 
+    {
+    font-family: 'Playfair Display';
+    font-style: normal;
+    src: local('Playfair_Display/PlayfairDisplay-VariableFont_wght.ttf') ;
+    font-weight: 1 999;
+    }
+
+body
+    {
+    font-family: 'Open Sans', sans-serif ;
+    font-size: 14px ;
+    }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+    {
+    font-family: 'Playfair Display', serif ;
+    }
+
+a
+    {
+    color: $primary-color ;
+    }
+
+.levi-primary-btn
+    {
+    @include button($secondary-color, transparent, $white-color, $secondary-color) ;   
+    }
+
+.levi-secondary-btn
+    {
+    @include button($white-color, transparent, $secondary-color, $white-color) ;   
+    }

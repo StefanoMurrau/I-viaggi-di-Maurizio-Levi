@@ -1,0 +1,40 @@
+#gallery
+    {
+    background-color: $accent-color ;
+
+    .container-fluid
+        {
+        @include section-padding($top-padding, $bottom-padding) ;
+
+        .gallery-img-container
+            {
+            #start,
+            #end
+                {
+                height: 600px ;
+                background-position: center center ;
+                background-repeat: no-repeat ;
+                background-size: cover ;
+
+                &:hover 
+                    {
+                    cursor: pointer ;
+                    }
+                }
+
+            .upper,
+            .lower
+                {
+                height: 300px ;
+                background-position: center center ;
+                background-repeat: no-repeat ;
+                background-size: cover ;
+
+                &:hover 
+                    {
+                    cursor: pointer ;
+                    }
+                }
+            }
+        }
+    }

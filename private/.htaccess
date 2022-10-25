@@ -1,0 +1,16 @@
+Options -Indexes
+
+<FilesMatch "dbconn.php">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "functions.php">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+<FilesMatch "settings.php">
+    Order allow,deny
+    Deny from all
+</FilesMatch>

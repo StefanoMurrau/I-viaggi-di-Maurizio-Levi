@@ -1,0 +1,18 @@
+#mission .container .row
+    {
+    .tittle
+        {
+        font-family: "Playfair Display",serif;
+        font-size: calc(1.1rem + .3vw);
+        color: #a06b1b;
+        text-transform: uppercase;
+        font-weight: 300;
+        text-align: center;
+        }
+
+    .content p
+        {
+        font-size: calc(1rem + .2vw);
+        color: #3a2f26; 
+        }  
+    }

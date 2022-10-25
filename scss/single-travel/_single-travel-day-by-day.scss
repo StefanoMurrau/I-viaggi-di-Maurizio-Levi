@@ -1,0 +1,46 @@
+#day-by-day 
+    {
+    background-color: $accent-color ;
+
+    .container
+        {
+        padding-top: 4% !important ;
+        padding-bottom: 0 !important ;
+        }
+
+    .container-fluid 
+        {
+        padding-top: 0 !important ;
+        padding-bottom: 4% !important ;
+
+        /*.step-content
+            {
+            .payoff
+                {
+                @include payoff-tipography($secondary-color);  
+                }
+            
+            .title
+                {
+                @include title-tipography($primary-color);
+                font-size: calc(1.8rem + 0.4vw) !important ;
+                padding-right: 40px ;
+                }
+
+            .content
+                {
+                @include paragraph-tipography($primary-color) ;  
+                padding-left: 60px ;
+                padding-right: 60px ;
+                }
+            }
+
+        .step-image
+            {
+            img 
+                {
+                max-width: 600px ;
+                }
+            }*/
+        }  
+    }

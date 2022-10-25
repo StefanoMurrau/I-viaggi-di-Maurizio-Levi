@@ -1,0 +1,248 @@
+#contatti .wrap-contatti 
+    {
+    max-width: 70%;
+    padding-top: 4%;
+    padding-bottom: 4%;
+    }
+
+#contatti
+    {
+    .wrap-input 
+        {
+        text-align: center ;
+        margin: auto ;
+        max-width: 600px ;
+
+        .form-control 
+            {
+            @include paragraph-tipography($primary-color) ;
+            background-color: rgba(255, 255, 255, 1) ;
+            color: $secondary-color;
+            border: none ;
+            transition: all 0.4s linear ;
+
+            &:focus,
+            &:active 
+                {
+                border-color: inherit ;
+                -webkit-box-shadow: none ;
+                box-shadow: none ;
+                color: $secondary-color ;
+                }
+
+            &:hover 
+                {
+                background-color: $secondary-color ;
+                color: $white-color ;
+                border: none ;
+                }
+
+            &::placeholder 
+                {
+                @include paragraph-tipography($secondary-color) ;
+                font-size: 90% ;
+                font-style: italic ;
+                opacity: 1 ;
+                }
+        
+            &::-ms-input-placeholder 
+                {
+                @include paragraph-tipography($secondary-color) ;
+                font-size: 90% ;
+                font-style: italic ;
+                opacity: 1 ;
+                }
+        
+            &::-ms-input-placeholder 
+                {
+                font-size: 90% ;
+                @include paragraph-tipography($secondary-color) ;
+                font-style: italic ;
+                opacity: 1 ;
+                }
+
+            &:focus::placeholder,
+            &:hover::placeholder
+                {
+                color: $white-color  ;
+                }
+        
+            &:focus::-ms-input-placeholder,
+            &:hover::-ms-input-placeholder
+                {
+                color: $white-color  ;
+                }
+        
+            &:focus::-ms-input-placeholder,
+            &:hover::-ms-input-placeholder
+                {
+                color: $white-color ;
+                }
+            }
+
+        label[for="privacy_1"],
+        label[for="privacy_2"],
+        label[for="privacy_3"]
+            {
+            font-size: 90% ;
+            }
+
+        input[type="checkbox"] 
+            {
+            filter: hue-rotate(200deg) ;
+            }
+
+        .border-bottom 
+            {
+            border-color: $primary-color ;
+            border-radius: 0  ;
+            }
+
+        .form-check-label 
+            {
+            @include paragraph-tipography($primary-color) ;
+            font-style: italic ;
+            }
+        }
+    }
+
+#contatti .divider
+    {
+    margin-bottom: 8% ;
+    }
+
+#contatti .diamond 
+    {
+    width: 3em;
+    height: 3em;
+    background: #a06b1b;
+    -webkit-transform: rotate(-45deg);
+    -moz-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    -o-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    -webkit-transform-origin: 0 100%;
+    -moz-transform-origin: 0 100%;
+    -ms-transform-origin: 0 100%;
+    -o-transform-origin: 0 100%;
+    transform-origin: 0 100%;
+    position: absolute;
+    right: calc(50% - 3em);
+    bottom: -30px;
+    }
+
+#contatti .contatti-image-1 
+    {
+    display: flex;
+    flex-direction: column;
+    background-image: linear-gradient(white, 30%, transparent), url('../img/beautiful-shot-high-white-hilltops-mountains-covered-fog_181624-399.webp');
+    background-image:    -moz-linear-gradient( #FFF,transparent), url('../img/beautiful-shot-high-white-hilltops-mountains-covered-fog_181624-399.webp'); 
+    background-image:    -webkit-linear-gradient( #FFF,transparent), url('../img/beautiful-shot-high-white-hilltops-mountains-covered-fog_181624-399.webp'); 
+    background-image:    -o-linear-gradient( #FFF,transparent), url('../img/beautiful-shot-high-white-hilltops-mountains-covered-fog_181624-399.webp'); 
+    background-image:    -ms-linear-gradient( #FFF,transparent), url('../img/beautiful-shot-high-white-hilltops-mountains-covered-fog_181624-399.webp'); 
+    height: auto;
+    align-self: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    align-items: center;
+    justify-content: center;
+    }
+
+#contatti .contatti-card 
+    {
+    background: transparent;
+    box-shadow: none;
+    }
+
+#contatti ul 
+    {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font-size: 16px;
+    color: #392F26;
+    }
+
+#contatti p i 
+    {
+    height: 30px;
+    width: 30px;
+    font-size: 20px;
+    }
+
+#contatti .contatti-span 
+    {
+    font-weight: bolder;
+    }
+
+#contatti .levi-i-frame 
+    {
+    background-size: auto;
+    background-color: #E1C9AB;
+    height: 450px;
+    }
+
+#contatti .contatti-href 
+    {
+    text-decoration: none;
+    color: #392F26;
+    }
+
+#contatti .card:hover 
+    {
+    -webkit-transform: none !important;
+    transform: none !important;
+    }
+
+
+/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+    #contatti .wrap-contatti {
+        max-width: 100%;
+    }
+
+    #contatti .contatti-image-1 {
+        height: auto;
+    }
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+    #contatti .wrap-contatti {
+        max-width: 95%;
+    }
+
+    #contatti .contatti-image-1 {
+        height: auto;
+    }
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+    #contatti .wrap-contatti {
+        max-width: 70%;
+    }
+
+    #contatti .contatti-image-1 {
+        height: auto;
+    }
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+    #contatti .wrap-contatti {
+        max-width: 85%;
+    }
+
+    #contatti .contatti-image-1 {
+        height: auto;
+    }
+
+    /* Extra large devices (large laptops and desktops, 1200px and up) */
+    @media only screen and (min-width: 1200px) {
+        #contatti .wrap-contatti {
+            max-width: 80%;
+        }
+    }
+}

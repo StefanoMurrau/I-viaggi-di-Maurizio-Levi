@@ -1,0 +1,22 @@
+/* LOGO-CAAROUSEL*/
+#logo-carousel 
+    {
+    .container 
+        {
+        @include section-padding($top-padding, $full-bottom-padding) ;
+        }
+
+    .owl-carousel 
+        {
+        img
+            {
+            max-width: 200px ;
+            margin: auto ;
+            }
+        }
+
+        .owl-dots
+            {
+            display: none ;
+            }
+    }

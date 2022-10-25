@@ -1,0 +1,15 @@
+#single-info 
+    {
+    background-color: $accent-color ;
+
+    .container 
+        {
+        @include section-padding($top-padding, $bottom-padding) ;
+
+        #gmap
+            {
+            background-color: cadetblue ;
+            height: 550px ;
+            }
+        }  
+    }

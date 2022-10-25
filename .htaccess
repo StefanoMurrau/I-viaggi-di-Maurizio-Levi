@@ -1,0 +1,5 @@
+# To enable the "WEBSITE UNDER CONSTRUCTION" page
+ErrorDocument 403 /under-construction/under-construction.html
+order deny,allow
+deny from all
+allow from 81.56.60.231 93.44.104.90 93.62.155.212 109.52.199.203 2.230.98.148
