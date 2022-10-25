@@ -1,0 +1,648 @@
+/* if(!function_exists('send_alert_mail')) 
+        {
+        function send_alert_mail($address, $address_name, $subject, $body, $alt_body, $from_name)
+            {
+            $mail = new PHPMailer ;
+            $mail->isSMTP() ;
+
+            //Enable SMTP debugging
+            // 0 = off (for production use)
+            // 1 = client messages
+            // 2 = client and server messages
+            $mail->SMTPDebug = 0 ;
+
+            $mail->SMTPAuth = true ;
+            $mail->IsHTML(true) ;
+            $mail->Subject = $subject ;
+            $mail->Body = $body ;
+            $mail->AltBody = $alt_body ;
+            $mail->Host = constant('MAIL_HOST') ;
+            $mail->Port = 465 ;
+            $mail->SMTPSecure = 'ssl' ;
+            $mail->Username = constant("MAIL_USERNAME") ;
+            $mail->Password = constant("MAIL_PASSWORD") ;
+            $mail->setFrom(constant('MAIL_ADDRESS'), $from_name) ;
+            $mail->addReplyTo(constant('MAIL_ADDRESS'), $from_name) ;
+            $mail->addAddress($address, $address_name) ;
+
+            if (!$mail->send()) 
+                {
+                $error = $mail->ErrorInfo ;
+                return $error ;
+                }
+            else 
+                {
+                return 1 ;
+                }
+            }
+        }
+	
+    if(!function_exists('base_url')) 
+        {
+        function base_url($atRoot=FALSE, $atCore=FALSE, $parse=FALSE)
+            {
+            if (isset($_SERVER['HTTP_HOST']))
+                {
+                $http = isset($_SERVER['HTTPS']) && strtolower($_SERVER['HTTPS']) !== 'off' ? 'https' : 'http' ;
+                $hostname = $_SERVER['HTTP_HOST'] ;
+                $dir =  str_replace(basename($_SERVER['SCRIPT_NAME']), '', $_SERVER['SCRIPT_NAME']) ;
+
+                $core = preg_split('@/@', str_replace($_SERVER['DOCUMENT_ROOT'], '', realpath(dirname(__FILE__))), NULL, PREG_SPLIT_NO_EMPTY) ;
+                $core = $core[0] ;
+
+                $tmplt = $atRoot ? ($atCore ? "%s://%s/%s/" : "%s://%s/") : ($atCore ? "%s://%s/%s/" : "%s://%s%s") ;
+                $end = $atRoot ? ($atCore ? $core : $hostname) : ($atCore ? $core : $dir) ;
+                $base_url = sprintf( $tmplt, $http, $hostname, $end ) ;
+                }
+            else $base_url = 'http://localhost/' ;
+
+            if ($parse) 
+                {
+                $base_url = parse_url($base_url) ;
+                if (isset($base_url['path'])) if ($base_url['path'] == '/') $base_url['path'] = '' ;
+                }
+
+            return $base_url ;
+            }
+        } */
+	
+    if(!function_exists('url_exist')) 
+        {
+        function url_exist($URL)
+            {
+            return ( $result = getimagesize($URL) )  ? true : false ;
+            }
+        }
+
+	if(!function_exists('get_base_url')) 
+		{
+		/**
+		 * It returns the current URL
+		 * 
+		 * @return The base URL of the page.
+		 */
+		function get_base_url()
+			{
+    		if(isset($_SERVER['HTTPS']))
+				{
+        		$protocol = ($_SERVER['HTTPS'] && $_SERVER['HTTPS'] != "off") ? "https" : "http" ;
+    			}
+    		else{
+        		$protocol = 'http' ;
+    			}
+			return $protocol . "://" . $_SERVER['HTTP_HOST'] ;
+			}
+		}
+
+	if(!function_exists('get_image_url')) 
+		{
+		/**
+		 * It returns the current URL
+		 * 
+		 * @return The base URL of the page.
+		 */
+		function get_image_url($base_url, $url_path, $url_image)
+			{
+			$return = 0;	
+			if (!filter_var($url_image, FILTER_VALIDATE_URL) === false) 
+			{
+				$return = $url_image;
+			} else {
+				$return = $base_url . $url_path .$url_image ;
+			}
+			return $return;
+			}
+		}
+
+
+		
+	if(!function_exists('get_assets')) 
+		{
+		/**
+		 * It includes a file from the assets folder, and if a page is specified, it includes a file from the
+		 * assets folder with the page name in the file name
+		 * 
+		 * @param asset The asset you want to include.
+		 * @param page The page you're on.
+		 * @param title The title of the page.
+		 * @param data This is the data that is passed to the asset.
+		 * @param conn This is the database connection.
+		 * @return the include_once() function.
+		 */
+		function get_assets($asset, $page = null, $title = null, $data = null, $conn = null)
+			{
+			return ($page) ? include_once("assets" . DIRECTORY_SEPARATOR . $page . "-" . $asset . ".php") : include_once("assets" . DIRECTORY_SEPARATOR . $asset . ".php") ;
+			}
+		}
+
+
+	if(!function_exists('create_api_token')) 	
+		{
+		/**
+		 * It creates a token for the API.
+		 * 
+		 * @return The encrypted string.
+		 */
+		function create_api_token()
+			{
+			$textToEncrypt = strftime(constant("TEXT_TO_ENCRYPT")) ;
+			$encryptionMethod = "AES-256-CBC" ;
+			$secretHash = constant("SECRET_HASH") ;
+
+			return openssl_encrypt($textToEncrypt, $encryptionMethod, $secretHash) ;
+			}
+		}
+
+
+	if(!function_exists('mc_apicall')) 	
+		{	
+		/**
+		 * It takes a URL, an endpoint, and a payload, and returns the response from the API
+		 * 
+		 * @param url The URL of your API endpoint.
+		 * @param endpoint The API endpoint you want to call.
+		 * @param payload This is the data that you want to send to th API.
+		 */
+		function mc_apicall($url, $endpoint, $payload)
+			{
+			$curl = curl_init() ;
+
+			curl_setopt($curl, CURLOPT_URL, $url . $endpoint) ;
+			curl_setopt($curl, CURLOPT_POSTFIELDS,  json_encode($payload)) ;
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1) ;
+			curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+				'Content-Type:application/json',
+				'Content-length: ' . strlen( json_encode($payload) )
+			)) ;
+
+			$response = curl_exec($curl) ;
+			$httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE) ;
+
+			curl_close($curl) ;
+
+			return ( $httpcode == "200" ) ? json_decode($response, true) : NULL ;
+			}	
+		}
+
+
+	if(!function_exists('sort_by_priority')) 	
+		{	
+		/**
+		* If ['prioritaBannerLevi'] is set, return 1 if ['prioritaBannerLevi'] is greater than
+		* ['prioritaBannerLevi'], otherwise return -1
+		* 
+		* @param a The first array to compare
+		* @param b the array to be sorted
+		*/
+		function sort_by_priority($a, $b) 
+			{
+			if( $a["prioritaBannerLevi"] )
+				{
+				return ( $a['prioritaBannerLevi'] > $b['prioritaBannerLevi'] ) ? 1 : -1 ;
+				}
+			}
+		}
+
+
+	if(!function_exists('sort_by_date')) 	
+		{
+		/**
+		* If the first array has a value for the key "dataPartenza", then return 1 if the value of the key
+		* "dataPartenza" in the first array is greater than the value of the key "dataPartenza" in the
+		* second array, otherwise return -1
+		* 
+		* @param a The first array to compare
+		* @param b The current item in the array.
+		*/
+		function sort_by_date($a, $b) 
+			{
+			if( $a["dataPartenza"] )
+				{
+				return ( $a['dataPartenza'] > $b['dataPartenza'] ) ? 1 : -1 ;
+				}
+			}
+		}
+
+		
+	if(!function_exists('test_id')) 	
+		{	
+		/**
+		 * It returns true if the idViaggioKel key of the array is in the array .
+		 * 
+		 * @param var the array of values for the current row
+		 * @return the array of ids that are in the array .
+		 */
+		function test_id($var)
+			{
+			return in_array($var['idViaggioKel'], $ids) ;
+			}
+		}
+
+
+	if(!function_exists('mc_get_img_banner_viaggi')) 	
+		{	
+		/**
+		 * It returns an array of data about the banner image for a given trip.
+		 * 
+		 * @param website the website name, e.g. "levi"
+		 * @param idviaggio the id of the trip
+		 * @param type the type of image you want to get.
+		 * @param conn the database connection
+		 * @param kel12_image_base_url the base url for the images.
+		 * 
+		 * @return An array of the image data.
+		 */
+		function mc_get_img_banner_viaggi($website, $idviaggio, $type, $conn, $kel12_image_base_url)
+			{
+			$src = get_base_url() . "/img/levi-logo.svg" ;  
+
+			$sql = "SELECT id
+					FROM mc_tassonomie
+					WHERE nome = ?
+					OR nome = ?
+					ORDER BY nome" ;
+
+			$rs = $conn->prepare($sql) ;
+			$rs->bindParam(1, $type, PDO::PARAM_STR) ;
+			$rs->bindParam(2, $website, PDO::PARAM_STR) ;
+	
+			$rs->execute() ;
+
+			$result = $rs->fetchAll(PDO::FETCH_ASSOC) ;
+
+			$sql = 	"SELECT A.*, B.*, C.*
+					FROM 	foto AS A, mc_foto_tassonomie AS B, mc_foto_tassonomie_website AS C
+					WHERE  	A.id_foto = B.id_foto
+					AND 	A.id_foto = C.id_foto
+					AND 	B.id_viaggio_kel12 = ?
+					AND 	B.id_tassonomia = ?
+					AND 	C.id_tassonomia = ?" ;
+
+			$rs = $conn->prepare($sql) ;
+			
+			$rs->bindParam(1, $idviaggio, PDO::PARAM_INT) ;
+			$rs->bindParam(2, $result[0]['id'], PDO::PARAM_INT) ;
+			$rs->bindParam(3, $result[1]['id'], PDO::PARAM_INT) ;
+
+			$rs->execute() ;
+
+			$result = $rs->fetch(PDO::FETCH_ASSOC) ;
+
+			if($result)
+				{
+				$src = $kel12_image_base_url . "/" . $result['continente'] . "/" .$result['nome'] . ".jpg" ;
+				}
+
+			$img_array = array(
+				"id_foto"       => $result['id_foto'],
+				"nome"          => $result['nome'], 
+				"titolo"        => $result['titolo'] , 
+				"descrizione"   => $result['descrizione'],  
+				"width"         => $result['width'], 
+				"height"        => $result['height'], 
+				"url_foto"      => $src
+				);
+
+			return $img_array ;
+			}
+		}
+
+	function mc_get_img_gallery ($website, $idviaggio, $type, $conn)
+		{
+			//assumiamo che la gallery sia uguale per tutti i siti
+			//website lo passo per eventuali modifiche future
+			$base_url =  "https://kel12image.com/" ;
+			$errore = "ATT.NE: ";
+			$id_foto = array();
+			$sql="SELECT * FROM icnc_foto_viaggi AS FV JOIN foto AS FT ON FV.ID_foto = FT.id_foto where (IdViaggioKel = '$idviaggio' AND (type = '$type' or type = ''))";
+			$ii = 0;
+			
+		
+			foreach ($conn->query($sql) as $row_foto) {
+				$src = $base_url . "uploads/" .$row_foto['continente'] ."/" .$row_foto['nome'] .".jpg";
+				$a[$ii]['id_foto'] = $row_foto['ID_foto_viaggi']; 
+				$a[$ii]['nome'] = $row_foto['nome'];  
+				$a[$ii]['titolo'] =  $row_foto['titolo'] ;  
+				$a[$ii]['descrizione']   = $row_foto['descrizione']; 
+				$a[$ii]['width']  =  $row_foto['width']; 
+				$a[$ii]['height'] =  $row_foto['height'];
+				$a[$ii]['url_foto']  = $src;
+				
+				$ii = $ii + 1;
+				
+		
+			}
+			if(!$ii)
+			{
+				$errore .= " NO GALLERY - ";
+				throw new Exception("$errore");
+			} 
+			return $a ;
+		}
+
+		
+	function mc_get_img_daybyday_viaggio ($website, $idviaggio, $conn)
+		{
+		//assumiamo che la gallery sia uguale per tutti i siti
+		//website lo passo per eventuali modifiche future
+		$base_url =  "https://kel12image.com/" ;
+		$errore = "ATT.NE: ";
+		$id_foto = array();
+		
+		$ii = 0;
+		
+		$id_tassonomia_website = 0;
+		$sql="SELECT * FROM mc_tassonomie WHERE nome = '$website'";
+		foreach ($conn->query($sql) as $row) {
+			$id_tassonomia_website  = $row['id'];
+		}
+		if(!$id_tassonomia_website)
+		{
+			$errore .= " non trovata tassonomia: $website -";
+			throw new Exception("$errore");
+		}
+		
+		$sql="SELECT * FROM mc_foto_daybyday AS DBD JOIN foto AS FT ON FT.id_foto = DBD.id_foto JOIN mc_foto_tassonomie_website AS WS ON WS.id_foto = DBD.id_foto WHERE DBD.id_viaggio_kel12 = $idviaggio AND WS.id_tassonomia = $id_tassonomia_website";
+		foreach ($conn->query($sql) as $row_foto) {
+			$src = $base_url . "uploads/" .$row_foto['continente'] ."/" .$row_foto['nome'] .".jpg";
+
+			$a[$ii]['id_giorno_daybyday'] = $row_foto['id_giorno_daybyday']; 
+			$a[$ii]['id_foto'] = $row_foto['id_foto']; 
+			$a[$ii]['nome'] = $row_foto['nome'];  
+			$a[$ii]['titolo'] =  $row_foto['titolo'] ;  
+			$a[$ii]['descrizione']   = $row_foto['descrizione']; 
+			$a[$ii]['width']  =  $row_foto['width']; 
+			$a[$ii]['height'] =  $row_foto['height'];
+			$a[$ii]['url_foto']  = $src;
+			
+			$ii = $ii + 1;
+			
+
+		}
+		if(!$ii)
+		{
+			$errore .= " Non ci sono viaggi pubblicati per il viaggio: $idviaggio  per il sito $website  - ";
+			//throw new Exception("$errore");
+		} 
+		return $a ;
+	}
+
+
+	if(!function_exists('mc_get_img_areageo')) 	
+		{	
+		function mc_get_img_areageo ($website, $id_areageografica, $type, $conn)
+			{
+			  $base_url =  "https://kel12image.com/" ;
+			  $errore = "ATT.NE: ";
+			  $id_foto = 0;
+			
+			  $id_tassonomia_areageo = 0;
+			  $sql="SELECT * FROM mc_tassonomie WHERE nome = '$type' ";
+			  foreach ($conn->query($sql) as $row) {
+				$id_tassonomia_areageo  = $row['id'];
+			  }
+			  if(!$id_tassonomia_areageo)
+			  {
+				$errore .= " non trovata tassonomia: $type - ";
+				throw new Exception("$errore");
+			  }
+			
+			  $sql="SELECT * FROM `mc_foto_areageografica` as AG JOIN mc_foto_tassonomie_website AS WS ON AG.id_foto = WS.id_foto join mc_tassonomie as TAS ON TAS.id = WS.id_tassonomia JOIN foto as FT on FT.id_foto = WS.id_foto WHERE (AG.id_areageografica = $id_areageografica and TAS.nome = '$type');";;
+			  foreach ($conn->query($sql) as $row_foto) {
+				$id_foto  = $row_foto['id_foto']; 
+			  }
+			  if(!$id_foto)
+			  {
+				$errore .= " id immagine non esistente per tassonomia: $type per sito $website e id Area Geografica $id_areageografica- ";
+				throw new Exception("$errore");
+			  }
+			
+			  if($id_foto and $id_tassonomia_areageo )
+			  {
+			
+				$src = $base_url . "uploads/" .$row_foto['continente'] ."/" .$row_foto['nome'] .".jpg";
+				$a = array(
+					"id_foto"       => $row_foto['id_foto'],
+					"nome"          => $row_foto['nome'], 
+					"titolo"        => $row_foto['titolo'] , 
+					"descrizione"   => $row_foto['descrizione'],  
+					"width"         => $row_foto['width'], 
+					"height"        => $row_foto['height'], 
+					"url_foto"      => $src
+				);
+				return $a ;
+				
+			
+			  } 
+				else 
+			  {
+					throw new Exception("$errore");
+			  }
+			  
+			}
+		}
+
+
+	function mc_get_img_nazione($website, $id_nazione, $type, $conn)
+		{
+		$base_url =  "https://kel12image.com/" ;
+		$src = get_base_url() . "/img/levi-logo.svg" ;  
+
+		$sql = "SELECT * 
+				FROM mc_tassonomie 
+				WHERE nome = '" . $type . "' ;" ;
+
+		foreach($conn->query($sql) as $row) 
+			{
+			$id_tassonomia_areageo  = $row['id'];
+		  	}
+		
+		$sql = "SELECT * 
+				FROM mc_foto_nazione as AG 
+				JOIN mc_foto_tassonomie_website AS WS 
+				ON AG.id_foto = WS.id_foto 
+				join mc_tassonomie as TAS 
+				ON TAS.id = WS.id_tassonomia 
+				JOIN foto as FT on FT.id_foto = WS.id_foto 
+				WHERE (AG.id_nazione = " . $id_nazione . " and TAS.nome = '" . $type . "');" ;
+
+
+		foreach($conn->query($sql) as $row_foto) 
+			{
+			$id_foto  = $row_foto['id_foto']; 
+		  	}
+
+		if($id_foto && $id_tassonomia_areageo)
+		  	{
+			$src = $base_url . "uploads/" .$row_foto['continente'] ."/" .$row_foto['nome'] .".jpg";
+			}
+
+		$a = array(
+			"id_foto"       => $row_foto['id_foto'],
+			"nome"          => $row_foto['nome'], 
+			"titolo"        => $row_foto['titolo'] , 
+			"descrizione"   => $row_foto['descrizione'],  
+			"width"         => $row_foto['width'], 
+			"height"        => $row_foto['height'], 
+			"url_foto"      => $src
+			) ;
+
+		return $a ;
+		} 
+		
+
+	if(!function_exists('mc_middleware_call')) 	
+		{		
+		/**
+		 * It takes a URL, an endpoint, and an optional parameter string, and returns the JSON response from
+		 * the API
+		 * 
+		 * @param url The URL of the API.
+		 * @param endpoint The endpoint you want to call.
+		 * @param params 
+		 * 
+		 * @return the response from the API call.
+		 */
+		function mc_middleware_call($url, $endpoint, $params = NULL)
+			{
+			switch ($endpoint) 
+				{
+				case "/esperti":
+				  	return array(
+						"img" => "" 
+					) ;
+				  	break ;
+				default:
+					$curl = curl_init() ;
+				
+					curl_setopt($curl, CURLOPT_URL, $url . $endpoint . $params) ;
+					curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, 0);
+					curl_setopt($curl, CURLOPT_TIMEOUT, 30);
+					curl_setopt($curl, CURLOPT_CONNECTTIMEOUT, 30);
+					curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);   
+					curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1) ;
+					curl_setopt($curl, CURLOPT_FOLLOWLOCATION, 1) ;
+					curl_setopt($curl, CURLOPT_HTTPHEADER, array(
+						'Content-Type:application/json',
+						'Cache-Control: no-cache',
+						'User-Agent: Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:28.0) Gecko/20100101 Firefox/28.0'
+							)
+					) ;
+		
+					$response = curl_exec($curl) ;
+					$httpcode = curl_getinfo($curl, CURLINFO_HTTP_CODE) ;
+				
+					curl_close($curl) ;
+		
+					return ( $httpcode == "200" ) ? json_decode($response, true) : NULL ;
+				}
+			}	
+		}
+	
+
+	function mc_get_img_business_object($website, $idlineaviaggio, $type, $typeBO, $conn)
+		{
+		// cerco immagine con id business objetc - linee viaggio - Tout Leader  con tipoBO (LINEAVIAGGIO / TOUR LEADER) -- se esiste
+		// cerco per nome la id della tassonomia sito web
+		// cerco per nome la id della tassonomia di interesse $type = CARD-LINEEVIAGGIO o BANNER-LINEEVIAGGIO / TOURLEADER 
+		  
+		$base_url =  "https://kel12image.com/" ;
+		$errore = "ATT.NE: ";
+		$id_foto = 0;
+
+		$sql="SELECT * FROM mc_foto_business_object AS BO JOIN foto AS FT ON BO.id_foto = FT.id_foto where (id_business_object = '$idlineaviaggio' AND type_business_object = '$typeBO')";
+		  
+		foreach ($conn->query($sql) as $row_foto) 
+			{
+			$id_foto  = $row_foto['id_foto']; 
+		  	}
+
+		if(!$id_foto)
+		  	{
+			$errore .= " id immagine non esistente per linea di viaggio: $idlineaviaggio - ";
+			throw new Exception("$errore");
+		  	}
+		
+		$id_tassonomia_lineaviaggio = 0;
+		  
+		$sql="SELECT * FROM mc_tassonomie WHERE nome = '$type' ";
+
+		foreach ($conn->query($sql) as $row) 
+			{
+			$id_tassonomia_lineaviaggio  = $row['id'];
+		  	}
+
+		if(!$id_tassonomia_lineaviaggio)
+		  	{
+			$errore .= " non trovata tassonomia: $type - ";
+			throw new Exception("$errore");
+		  	}
+		
+		$id_tassonomia_website = 0;
+
+		$sql="SELECT * FROM mc_tassonomie WHERE nome = '$website'";
+
+		foreach ($conn->query($sql) as $row) 
+			{
+			$id_tassonomia_website  = $row['id'];
+		  	}
+
+		if(!$id_tassonomia_website)
+		  	{
+			$errore .= " non trovata tassonomia: $website -";
+			throw new Exception("$errore");
+		  	}
+		
+		if($id_foto and $id_tassonomia_website and $id_tassonomia_lineaviaggio  )
+		  	{
+			$ok_lineaviaggio = 0;
+			$ok_website = 0;
+		
+			$sql="SELECT * FROM `mc_foto_tassonomie_website` where id_foto = $id_foto and (id_tassonomia =  $id_tassonomia_website )";
+			
+			foreach ($conn->query($sql) as $row) 
+				{
+				$ok_website = 1;
+				}
+
+			if(!$ok_website)
+				{
+				$errore .= " immagine $id_foto non associata a: $website -";
+				throw new Exception("$errore");
+				}
+		
+			$sql="SELECT * FROM `mc_foto_tassonomie_website` where id_foto = $id_foto and (id_tassonomia =  $id_tassonomia_lineaviaggio  )";
+
+			foreach ($conn->query($sql) as $row) 
+				{
+				$ok_lineaviaggio = 1;
+				}
+
+			if(!$ok_lineaviaggio )
+				{
+				$errore .= "immagine $id_foto non associata a: $type -";
+				throw new Exception("$errore");
+				}
+			
+			if($ok_lineaviaggio and $ok_website  )
+				{
+				$src = $base_url . "uploads/" .$row_foto['continente'] ."/" .$row_foto['nome'] .".jpg";
+				$a = array(
+					"id_foto"       => $row_foto['id_foto'],
+					"nome"          => $row_foto['nome'], 
+					"titolo"        => $row_foto['titolo'] , 
+					"descrizione"   => $row_foto['descrizione'],  
+					"width"         => $row_foto['width'], 
+					"height"        => $row_foto['height'], 
+					"url_foto"      => $src
+				);
+				return $a ;
+				}	
+		  	}
+		else 
+			{
+			throw new Exception("$errore");
+		  	}		  
+		}
+	
+?>
