@@ -2,12 +2,12 @@
 $id_nazione = $_GET['id'];
 
 $ii = 0;
-
+$nation=mc_middleware_call( constant("MIDDLEWARE_BASE_URL"), "nations/". (string)$id_nazione, "klsgp") ;
 $data = mc_middleware_call( constant("MIDDLEWARE_BASE_URL"), "nations-travels/". (string)$id_nazione, "levi") ;
-
+$numero_travel_kel12 = mc_middleware_call(constant("MIDDLEWARE_BASE_URL"), "utility/count-travels-nation/". (string)$id_nazione, "klsgp") ;
 ?>
 
-
+<?php if( array_key_exists("nations-travels", $data) && !empty($data["nations-travels"])&& !empty($data["nations-travels"][0]['travels']) ){ ?>
 <!-- NATION-CARDS START //-->
 <section id="travel-lines">
     <div class="nations-travels">
@@ -67,7 +67,7 @@ $data = mc_middleware_call( constant("MIDDLEWARE_BASE_URL"), "nations-travels/".
                     $ii = $ii + 1;
                 }
                 if (!$ii) {
-                    echo "Siamo spiacenti non sono previste partenze in questo mese.";
+                    echo "Siamo spiacenti non sono previste partenze per questa destinazione.";
                 }
 
                 ?>
@@ -76,5 +76,49 @@ $data = mc_middleware_call( constant("MIDDLEWARE_BASE_URL"), "nations-travels/".
     </div>
 
 </section>
-
+<?php
+}
+?>
 <!-- NATION-CARDS END //-->
+<?php
+if($numero_travel_kel12 > 0)
+{ 
+	
+	$link_tl = str_replace(" ", "-" , $nation[0]['description']) ;
+
+?>
+
+<style>
+#mission-kel12{
+	background-color: #e0c9aa;
+}
+#mission-kel12 .container {
+    padding-top: 8%;
+    padding-bottom: 8%;
+}
+#mission-kel12 .title {
+    font-family: 'Playfair Display', serif;
+    font-size: calc(1.1rem + 0.3vw);
+    color: #a06b1b;
+    text-transform: uppercase;
+    font-weight: 300;
+    text-align: center;
+	margin-bottom: 40px;
+}
+</style>
+
+<section id="mission-kel12" >
+	<div class="container">
+		<div class="row g-4">
+			<div class="col-12">
+				<div style="text-align: center;">
+					<h2 class="title">Scopri le partenze per <?php echo $nation[0]['description'];?> con i viaggi Kel 12</h2>
+					<a href="https://kel12.com/paese/<?php echo trim($link_tl);?>/">
+						<button class="levi-secondary-btn">Vai al sito Kel 12</button>
+					</a>	
+				</div>
+			</div>
+		</div>
+	</div>
+</section>
+<?php } ?>
